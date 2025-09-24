@@ -310,3 +310,17 @@ If you use components of this pipeline, please also cite the underlying methods:
 - **AbMPNN**: [Dreyer, F. A., Cutting, D., Schneider, C., Kenlay, H. & Deane, C. M. Inverse folding for
 antibody sequence design using deep learning. (2023).](https://www.biorxiv.org/content/10.1101/2025.05.09.653228v1.full.pdf)
 - **PyRosetta**: [https://www.pyrosetta.org/](https://www.pyrosetta.org/)
+
+## License
+
+This repository is licensed under the [Apache License 2.0](LICENSE).
+
+### External Dependencies
+
+Some components require separate licenses that are not included in this repository:
+
+- **IgLM**: Provided under a non-commercial academic license from Johns Hopkins University.  
+  See their documentation for details.  
+- **PyRosetta**: Provided by the Rosetta Commons and University of Washington under a non-commercial, non-profit license.  
+  PyRosetta cannot be redistributed and must be obtained separately.  
+  Commercial use requires a separate license. See [https://www.pyrosetta.org](https://www.pyrosetta.org).

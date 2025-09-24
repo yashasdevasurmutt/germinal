@@ -6,7 +6,6 @@ build/
 outputs/
 __pycache__/
 
-*.png
 **/.DS_Store
 *.pyc
 *.csv

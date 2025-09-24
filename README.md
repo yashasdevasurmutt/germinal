@@ -1,8 +1,13 @@
 # Germinal: Efficient generation of epitope-targeted de novo antibodies
 
-Germinal is a pipeline for designing de novo antibodies against target proteins. The pipeline follows a 3-step process: hallucination based on ColabDesign, selective sequence redesign with AbMPNN, and cofolding with a structure prediction model. Germinal is capable of designing both nanobodies and scFvs against user-specified residues on target proteins. 
+<p align="center">
+  <img src="assets/germinal.png" alt="Germinal Banner"/>
+</p>
 
-We describe Germinal in the preprint: "Efficient generation of epitope-targeted de novo antibodies with Germinal" *(coming soon)*.
+
+Germinal is a pipeline for designing de novo antibodies against specified epitopes on target proteins. The pipeline follows a 3-step process: hallucination based on ColabDesign, selective sequence redesign with AbMPNN, and cofolding with a structure prediction model. Germinal is capable of designing both nanobodies and scFvs against user-specified residues on target proteins. 
+
+We describe Germinal in the preprint: ["Efficient generation of epitope-targeted de novo antibodies with Germinal"](https://www.biorxiv.org/content/10.1101/2025.09.19.677421v1)
 
 **We are still actively working on code improvements.**
 
@@ -129,7 +134,6 @@ To design scFvs targeting PD-L1, run:
 python run_germinal.py run=scfv filter.initial=scfv
 ```
 
-
 If you wish to change the configuration of runs, you can:
 
  - create an entirely new config yaml
@@ -156,13 +160,16 @@ python run_germinal.py target=my_target
 
 **Use a different config file with Hydra:**
 ```bash
-python run_germinal.py --conifg_name new_config.yaml
+python run_germinal.py --config_name new_config.yaml
 ```
 
 <!-- TOC --><a name="cli-overrides"></a>
 ### CLI Overrides
 
-Hydra provides powerful CLI override capabilities. You can override any parameter in any configuration file:
+Hydra provides powerful CLI override capabilities. You can override any parameter in any configuration file.
+
+> [!NOTE]
+> Settings in `configs/run/` folder use the global namespace and do not need a `run` prefix before overriding. See example below.
 
 **Basic parameter overrides:**
 ```bash
@@ -172,14 +179,14 @@ python run_germinal.py max_trajectories=100 max_passing_designs=50
 # Override experiment settings
 python run_germinal.py experiment_name=my_experiment run_config=test_run
 
-# Override loss weights
-python run_germinal.py run.weights_plddt=1.5 run.weights_iptm=0.8
+# Override loss weights. Note: no run prefix since run settings are global
+python run_germinal.py weights_plddt=1.5 weights_iptm=0.8 
 ```
 
 **Filter threshold overrides:**
 ```bash
-# Make initial filters more stringent
-python run_germinal.py filter.initial.clashes.value=0.5
+# Make initial filters less stringent
+python run_germinal.py filter.initial.clashes.value=2
 
 # Adjust final filter thresholds
 python run_germinal.py filter.final.external_plddt.value=0.9 filter.final.external_iptm.value=0.8
@@ -207,7 +214,7 @@ python run_germinal.py \
   experiment_name="scfv_pdl1_test" \
   target.target_hotspots="A37,A39,A41" \
   filter.final.external_plddt.value=0.85 \
-  run.weights_iptm=1.0
+  weights_iptm=1.0
 ```
 
 
@@ -278,13 +285,13 @@ More tips coming soon!
 If you use Germinal in your research, please cite:
 
 ```bibtex
-@article{Mille2025,
-  author = {Mille-Fragoso, Luis and Wang, John and Driscoll, Claudia and Dai, Haoyu and Widatalla, Talal and Zhang, Xiaowei and Hie, Brian and Gao, Xiaojing}, 
-  title = {Efficient generation of epitope-targeted de novo antibodies}, 
-  year = {2025}, 
-  publisher = {Cold Spring Harbor Laboratory}, 
-  url = {}, 
-  journal = {bioRxiv}
+@article{mille-fragoso_efficient_2025,
+	title = {Efficient generation of epitope-targeted de novo antibodies with Germinal},
+   author = {Mille-Fragoso, Luis Santiago and Wang, John N. and Driscoll, Claudia L. and Dai, Haoyu and Widatalla, Talal M. and Zhang, Xiaowe and Hie, Brian L. and Gao, Xiaojing J.},
+	url = {https://www.biorxiv.org/content/10.1101/2025.09.19.677421v1},
+	doi = {10.1101/2025.09.19.677421},
+	publisher = {bioRxiv},
+	year = {2025},
 }
 ```
 

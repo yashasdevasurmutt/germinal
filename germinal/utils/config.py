@@ -26,6 +26,7 @@ Dependencies:
 import os
 from typing import Dict, Any
 from omegaconf import DictConfig, OmegaConf
+import warnings
 
 from germinal.utils.utils import (
     get_jax_device,
@@ -125,7 +126,8 @@ def initialize_germinal_run(
     """
     # Validate computational device availability for design execution
     assert get_jax_device(), "JAX device not available"
-    assert get_torch_device() == "cuda", "Torch device not available"
+    if get_torch_device() != "cuda":
+        warnings.warn("Torch device not available")
     # Construct hierarchical directory path for design outputs
     design_path = os.path.join(
         run_settings.get("project_dir", "."),

@@ -85,7 +85,7 @@ def main(cfg: DictConfig):
         )
         trajectory.set_save_location("trajectories")
 
-        print(f"\nStarting trajectory {i + 1}: {design_name}, {start_time}")
+        print(f"\nStarting trajectory {i + 1}: {design_name}")
 
         # Germinal design function
         design_output = germinal_design(

@@ -6,8 +6,31 @@ We describe Germinal in the preprint: "Efficient generation of epitope-targeted 
 
 **We are still actively working on code improvements.**
 
+## Contents
+
+<!-- TOC -->
+
+- [Setup](#setup)
+   * [Requirements](#requirements)
+   * [Installation](#installation)
+- [Usage](#usage)
+   * [Quick Start](#quick-start)
+      + [Configuration Structure](#configuration-structure)
+   * [Basic Usage](#basic-usage)
+   * [CLI Overrides](#cli-overrides)
+   * [Target Configuration](#target-configuration)
+   * [Filters Configuration](#filters-configuration)
+- [Output Format](#output-format)
+- [Tips for Design](#tips-for-design)
+- [Citation](#citation)
+- [Acknowledgments](#acknowledgments)
+
+<!-- TOC -->
+
+<!-- TOC --><a name="setup"></a>
 ## Setup
 
+<!-- TOC --><a name="requirements"></a>
 ### Requirements
 
 **Prerequisites:**
@@ -21,6 +44,7 @@ We describe Germinal in the preprint: "Efficient generation of epitope-targeted 
 - **Memory**: 80GB+ VRAM
 - **Storage (recommended)**: 50GB+ space for results
 
+<!-- TOC --><a name="installation"></a>
 ### Installation
 
 The repository provides a reproducible conda environment and an automated installer with GPU detection.
@@ -59,8 +83,10 @@ The repository provides a reproducible conda environment and an automated instal
 Notes:
 - AlphaFold-Multimer and AlphaFold3 parameters are large and must be downloaded manually.
 
+<!-- TOC --><a name="usage"></a>
 ## Usage
 
+<!-- TOC --><a name="quick-start"></a>
 ### Quick Start
 
 The main entry point to the pipeline is `run_germinal.py`. Germinal uses [Hydra](https://hydra.cc/) for orchestrating different configurations. An example main configuration file is located in `configs/config.yaml`. This yaml file contains high level run parameters as well as pointers to more granular configuration settings.
@@ -72,21 +98,23 @@ These detailed options are stored in four main settings files:
  - **Post-hallucination (initial) filters**: `configs/filter/initial/default.yaml`
  - **Final filters**: `configs/filters/final/default.yaml`
 
+<!-- TOC --><a name="configuration-structure"></a>
 #### Configuration Structure
 
 ```
 configs/
 ├── config.yaml              # Main configuration yaml
 ├── run/                     # Main run settings
-│   ├── vhh.yaml            # VHH (nanobody) specific settings
-│   └── scfv.yaml           # scFv specific settings
+│   ├── vhh.yaml             # VHH (nanobody) specific settings
+│   └── scfv.yaml            # scFv specific settings
 ├── target/                  # Target protein configurations
-│   └── pdl1.yaml           # PDL1 target example
+│   └── pdl1.yaml            # PDL1 target example
 └── filter/                  # Filter configurations
     ├── initial/
-    │   └── default.yaml    # Post-hallucination (initial) filters
+    │   └── default.yaml     # Post-hallucination (initial) filters
     └── final/
-        └── default.yaml    # Final acceptance filters
+        ├── default.yaml     # Final acceptance filters
+        └── scfv.yaml        # Final filters for scfv runs
 ```
 
 In general, the main run settings and filters should stay the same and can be run as defaults unless you are experimenting. To design nanobodies targeting PD-L1, simply run:
@@ -98,7 +126,7 @@ python run_germinal.py
 To design scFvs targeting PD-L1, run:
 
 ```bash
-python -u run_germinal.py run=scfv filter.initial=scfv
+python run_germinal.py run=scfv filter.initial=scfv
 ```
 
 
@@ -108,6 +136,7 @@ If you wish to change the configuration of runs, you can:
  - swap one of the four main settings files
  - pass specific overrides
 
+<!-- TOC --><a name="basic-usage"></a>
 ### Basic Usage
 
 **Run with defaults (VHH + PDL1 + default filters):**
@@ -130,6 +159,7 @@ python run_germinal.py target=my_target
 python run_germinal.py --conifg_name new_config.yaml
 ```
 
+<!-- TOC --><a name="cli-overrides"></a>
 ### CLI Overrides
 
 Hydra provides powerful CLI override capabilities. You can override any parameter in any configuration file:
@@ -181,6 +211,7 @@ python run_germinal.py \
 ```
 
 
+<!-- TOC --><a name="target-configuration"></a>
 ### Target Configuration
 
 For each new target, you will need to define a target settings yaml file which contains all relevant information about the target protin. Here is an example:
@@ -195,6 +226,7 @@ dimer: false  # support coming soon!
 length: 133
 ```
 
+<!-- TOC --><a name="filters-configuration"></a>
 ### Filters Configuration
 
 There are two sets of filters: post-hallucination (initial) filters and final filters. The post-hallucination filters are applied after the hallucination step to determine which sequences to proceed to the redesign step. This filter set is a subset of the final filters, which is applied at the end of the pipeline to determine passing antibody sequences. Here is an example of the post-hallucination filters:
@@ -205,7 +237,8 @@ percent_interface_cdr: {'value': 0.5, 'operator': '>'}
 interface_shape_comp: {'value': 0.6, 'operator': '>'}
 ```
 
-## Output
+<!-- TOC --><a name="output-format"></a>
+## Output Format
 
 Germinal generates organized output directories:
 
@@ -230,32 +263,43 @@ runs/your_target_nb_20240101_120000/
 - `accepted/structures/*.pdb` - Final antibody-antigen structure for passing antibody designs.
 - `all_trajectories.csv` - Complete list of designs that passed hallucination, their *in silico* metrics, which stage they reached, and the pdb path to the designed structure.
 
+<!-- TOC --><a name="tips-for-design"></a>
 ## Tips for Design
 
 Hallucination is inherently expensive. Designing against a 130 residue target takes anywhere from 3-8 minutes for a nanobody design iteration, depending on which stage the hallucinated sequence reaches. For scFvs, this number is around 50% larger.
 
 During sampling, we typically run antibody generation until there are around 1,000 passing designs against the specified target. Of those, we typically select the top 40-50 sequences for experimental testing based on a combination of *in silico* metrics described in the preprint. While *in silico* success rates vary wildly across targets, we estimate that 200-300 H100 80GB GPU hours of sampling are typically enough to discover some functional antibodies. 
 
+More tips coming soon!
+
+<!-- TOC --><a name="citation"></a>
 ## Citation
 
 If you use Germinal in your research, please cite:
 
 ```bibtex
-@article{citation,
+@article{Mille2025,
+  author = {Mille-Fragoso, Luis and Wang, John and Driscoll, Claudia and Dai, Haoyu and Widatalla, Talal and Zhang, Xiaowei and Hie, Brian and Gao, Xiaojing}, 
+  title = {Efficient generation of epitope-targeted de novo antibodies}, 
+  year = {2025}, 
+  publisher = {Cold Spring Harbor Laboratory}, 
+  url = {}, 
+  journal = {bioRxiv}
 }
 ```
 
+<!-- TOC --><a name="acknowledgments"></a>
 ## Acknowledgments
 
-Germinal builds upon the foundational work of previous hallucination-based protein design pipelines such as ColabDesign and BindCraft. We thank the developers for making their tools available to the research community. This codebase includes code from the ColabDesign and BindCraft repositories. 
+Germinal builds upon the foundational work of previous hallucination-based protein design pipelines such as ColabDesign and BindCraft and this codebase incorporates code from both repositories. We are grateful to the developers of these tools for making them available to the research community. 
 
 **Related Work:**
 If you use components of this pipeline, please also cite the underlying methods:
 
-- **AlphaFold-Multimer/ColabDesign**
-- **IgLM**
-- **Chai-1**
-- **AlphaFold3**
-- **AbMPNN**
-- **MPNN**
-- **PyRosetta**
+- **ColabDesign**: [https://github.com/sokrypton/ColabDesign](https://github.com/sokrypton/ColabDesign)
+- **IgLM**: [https://github.com/Graylab/IgLM](https://github.com/Graylab/IgLM)
+- **Chai-1**: [https://github.com/chaidiscovery/chai-lab](https://github.com/chaidiscovery/chai-lab)
+- **AlphaFold3**: [https://github.com/google-deepmind/alphafold3](https://github.com/google-deepmind/alphafold3)
+- **AbMPNN**: [Dreyer, F. A., Cutting, D., Schneider, C., Kenlay, H. & Deane, C. M. Inverse folding for
+antibody sequence design using deep learning. (2023).](https://www.biorxiv.org/content/10.1101/2025.05.09.653228v1.full.pdf)
+- **PyRosetta**: [https://www.pyrosetta.org/](https://www.pyrosetta.org/)

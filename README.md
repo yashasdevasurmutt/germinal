@@ -35,7 +35,7 @@ The repository provides a reproducible conda environment and an automated instal
 
 3. Run the installer (creates the `germinal` environment, installs GPU-enabled JAX/PyTorch when available, and validates the setup):
    ```bash
-   bash scripts/install_env.sh
+   bash scripts/install_env.bash
    ```
 
 3.5. Alternatively, see: `environment_setup.md` and follow steps in order. 

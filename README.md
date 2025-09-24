@@ -36,7 +36,9 @@ The repository provides a reproducible conda environment and an automated instal
    bash scripts/install_env.sh
    ```
 
-5. Copy `AlphaFold-Multimer` parameters to `params/` and untar them. 
+3.5. Alternatively, see: `environment_setup.md`
+
+4. Copy `AlphaFold-Multimer` parameters to `params/` and untar them. 
    Alternatively, you can run the following lines inside `params/` to download and untar:
    ```bash
    aria2c -q -x 16 https://storage.googleapis.com/alphafold/alphafold_params_2022-12-06.tar

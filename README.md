@@ -4,6 +4,8 @@ Germinal is a pipeline for designing de novo antibodies against target proteins.
 
 We describe Germinal in the preprint: "Efficient generation of epitope-targeted de novo antibodies with Germinal" *(coming soon)*.
 
+**We are still actively working on code improvements.**
+
 ## Setup
 
 ### Requirements

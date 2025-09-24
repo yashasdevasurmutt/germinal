@@ -1,0 +1,33 @@
+# @package _global_
+# Main Hydra configuration for Germinal
+# This file defines the default configuration and specifies which sub-configs to use
+
+defaults:
+  - run: vhh      
+  - target: pdl1             
+  - filter/initial: default  
+  - filter/final: default  
+  - _self_
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled  
+
+# high level run settings
+project_dir: "."
+results_dir: "results"
+experiment_name: "germinal_run"
+run_config: ""
+max_trajectories: 10000
+max_hallucinated_trajectories: 1000
+max_passing_designs: 100
+
+# paths
+pdb_dir: "pdbs"
+af_params_dir: ""
+dssp_path: "params/dssp"
+dalphaball_path: "params/DAlphaBall.gcc"
+
+# silence hydra output dir
+hydra:
+  output_subdir: null
+  run:
+    dir: .

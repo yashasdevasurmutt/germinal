@@ -1,0 +1,37 @@
+name: germinal
+channels:
+  - conda-forge
+  - bioconda
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - biopython
+  - pyyaml
+  - filelock
+  - hydra-core
+  - omegaconf
+  - mdtraj
+  - cvxopt
+  - mmseqs2
+  - ipython
+  - tqdm
+  - pip:
+      - absl-py
+      - chex
+      - dm-haiku
+      - dm-tree
+      - immutabledict
+      - ml-collections
+      - optax
+      - joblib
+      - py3Dmol
+      - colabfold
+      
+

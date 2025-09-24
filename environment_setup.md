@@ -54,7 +54,7 @@ pip install iglm torchvision==0.21.* chai-lab==0.6.1 \
   torch==2.6.* torchaudio==2.6.* torchtyping==0.1.5 torch_geometric==2.6.*
 ```
 
-**NOTE: ignore colabfold dependency errors
+> **Note:** ignore colabfold dependency errors
 
 ---
 

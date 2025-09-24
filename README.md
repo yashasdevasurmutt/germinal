@@ -38,7 +38,7 @@ The repository provides a reproducible conda environment and an automated instal
    bash scripts/install_env.sh
    ```
 
-3.5. Alternatively, see: `environment_setup.md`
+3.5. Alternatively, see: `environment_setup.md` and follow steps in order. 
 
 4. Copy `AlphaFold-Multimer` parameters to `params/` and untar them. 
    Alternatively, you can run the following lines inside `params/` to download and untar:

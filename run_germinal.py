@@ -97,6 +97,7 @@ def main(cfg: DictConfig):
         hallucination_success = trajectory_metrics_last.get("terminate", "") == ""
         # if hallucination failed, continue to next trajectory
         if not hallucination_success:
+            trajectory_time = utils.get_clean_time(time.time(), trajectory_start_time)
             print(f"Trajectory took: {trajectory_time}\n")
             failed_design += 1
             num_failed += 1

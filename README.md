@@ -35,7 +35,7 @@ The repository provides a reproducible conda environment and an automated instal
 
 3. Run the installer (creates the `germinal` environment, installs GPU-enabled JAX/PyTorch when available, and validates the setup):
    ```bash
-   bash scripts/install_env.sh
+   bash scripts/install_env.bash
    ```
 
 3.5. Alternatively, see: `environment_setup.md` and follow steps in order. 
@@ -58,7 +58,6 @@ The repository provides a reproducible conda environment and an automated instal
    ```
 
 Notes:
-- PyRosetta requires a separate academic license and is not installed automatically. See below.
 - AlphaFold-Multimer and AlphaFold3 parameters are large and must be downloaded manually.
 
 ## Usage

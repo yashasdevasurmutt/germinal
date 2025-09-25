@@ -60,7 +60,3 @@ external_ptm:
 external_pae:
   value: 7.2
   operator: '<'
-
-external_i_pae:
-  value: 0.27
-  operator: '<'

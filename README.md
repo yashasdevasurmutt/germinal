@@ -52,21 +52,13 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 <!-- TOC --><a name="installation"></a>
 ### Installation
 
-The repository provides a reproducible conda environment and an automated installer with GPU detection.
-
 1. Ensure you have an NVIDIA GPU with a recent driver (recommended CUDA 12+). You can verify with:
    ```bash
    nvidia-smi
    ```
-   If you do not have a GPU, CPU-only mode is supported for limited functionality.
-
 2. Install Miniconda or Anaconda if not already available.
 
-3. Run the installer (creates the `germinal` environment, installs GPU-enabled JAX/PyTorch when available, and validates the setup):
-   ```bash
-   bash scripts/install_env.bash
-   ```
-   Alternatively, see: `environment_setup.md` and follow steps in order. 
+3. Follow the instructions in `environment_setup.md`
 
 4. Copy AlphaFold-Multimer parameters to `params/` and untar them. 
    Alternatively, you can run the following lines inside `params/` to download and untar:
@@ -80,9 +72,9 @@ The repository provides a reproducible conda environment and an automated instal
    conda activate germinal
    ```
 
-6. (Optional) Re-run validation at any time:
+6. (Optional) Run validation at any time to ensure all packages have installed correctly:
    ```bash
-   python scripts/validate_install.py
+   python validate_install.py
    ```
 
 Notes:

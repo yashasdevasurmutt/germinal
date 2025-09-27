@@ -105,7 +105,7 @@ save_design_animations: false
 save_design_trajectory_plots: true
 
 # Other settings
-omit_AAs: false
+omit_AAs: "C"
 force_reject_AA: false
 dgram_cce: 0.01
 show_config: true

@@ -263,11 +263,13 @@ runs/your_target_nb_20240101_120000/
 - `all_trajectories.csv` - Complete list of designs that passed hallucination, their *in silico* metrics, which stage they reached, and the pdb path to the designed structure.
 
 <!-- TOC --><a name="tips-for-design"></a>
-## Tips for Design
+## Important Notes and Tips for Design
 
 Hallucination is inherently expensive. Designing against a 130 residue target takes anywhere from 3-8 minutes for a nanobody design iteration, depending on which stage the hallucinated sequence reaches. For scFvs, this number is around 50% larger.
 
-During sampling, we typically run antibody generation until there are around 1,000 passing designs against the specified target. Of those, we typically select the top 40-50 sequences for experimental testing based on a combination of *in silico* metrics described in the preprint. While *in silico* success rates vary wildly across targets, we estimate that 200-300 H100 80GB GPU hours of sampling are typically enough to discover some functional antibodies. 
+During sampling, we typically run antibody generation until there are around 1,000 passing designs against the specified target and observe a success rate of around 0.5 - 1 per GPU hour. Of those, we typically select the top 40-50 sequences for experimental testing based on a combination of *in silico* metrics described in the preprint. While *in silico* success rates vary wildly across targets, we estimate that 200-400 H100 80GB GPU hours of sampling are typically enough to generate ~200 successful designs and some functional antibodies. 
+
+Best design parameters are different for each target and antibody type! If you are experiencing low success rates, we recommend tweaking interface confidence weights (ipTM / iPAE), structure-based weights (helix, beta, framework loss), or the IgLM weights defined in `iglm_scale`. Filters are easily changeable in the filters configurations. To add or remove filters from the initial and final filtering rounds, simply create a new filter with the same name as the intended metric and specify the threshold value and the operator (<, >, =, etc).
 
 More tips coming soon!
 

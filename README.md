@@ -313,9 +313,9 @@ More tips coming soon!
 <!-- TOC --><a name="bugfix-changelog"></a>
 ## Bugfix Changelog
 
-- 9/25/25: Import fix for local colabdesign module (commit 8b5b655, ref issue #8) 
-- 9/25/25: A metric meant for tracking purposes `external_i_pae` was erroneously set to be used as a filter (commit 49be2e9, ref issue # 7)
-- 9/26/25: Resolved an error which caused passing runs to crash at the final stage due to a misnamed varibale (commit 9292e1e, ref issue #11)
+- 9/25/25: Import fix for local colabdesign module ([commit 8b5b655](https://github.com/SantiagoMille/germinal/commit/8b5b655), [pr #8](https://github.com/SantiagoMille/germinal/pull/8)) 
+- 9/25/25: A metric meant for tracking purposes `external_i_pae` was erroneously set to be used as a filter ([commit 49be2e9](https://github.com/SantiagoMille/germinal/commit/49be2e9), [issue #7](https://github.com/SantiagoMille/germinal/issues/7))
+- 9/26/25: Resolved an error which caused passing runs to crash at the final stage due to a misnamed variable ([commit 9292e1e](https://github.com/SantiagoMille/germinal/commit/9292e1e), [issue #11](https://github.com/SantiagoMille/germinal/issues/11))
 
 <!-- TOC --><a name="citation"></a>
 ## Citation
@@ -352,7 +352,7 @@ antibody sequence design using deep learning. (2023).](https://www.biorxiv.org/c
 <!-- TOC --><a name="community-acknowledgments"></a>
 ## Community Acknowledgments
 
-- cytokineking — for helping raise numerous bugs to our attention
+- [@cytokineking](https://github.com/cytokineking) — for helping raise numerous bugs to our attention
 
 ## License
 

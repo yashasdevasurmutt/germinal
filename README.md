@@ -28,8 +28,10 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
    * [Filters Configuration](#filters-configuration)
 - [Output Format](#output-format)
 - [Tips for Design](#tips-for-design)
+- [Bugfix Changelog](#bugfix-changelog)
 - [Citation](#citation)
 - [Acknowledgments](#acknowledgments)
+- [Community Acknowledgments](#community-acknowledgments)
 
 <!-- TOC -->
 
@@ -308,6 +310,13 @@ Best design parameters are different for each target and antibody type! If you a
 
 More tips coming soon!
 
+<!-- TOC --><a name="bugfix-changelog"></a>
+## Bugfix Changelog
+
+- 9/25/25: Import fix for local colabdesign module (commit 8b5b655, ref issue #8) 
+- 9/25/25: A metric meant for tracking purposes `external_i_pae` was erroneously set to be used as a filter (commit 49be2e9, ref issue # 7)
+- 9/26/25: Resolved an error which caused passing runs to crash at the final stage due to a misnamed varibale (commit 9292e1e, ref issue #11)
+
 <!-- TOC --><a name="citation"></a>
 ## Citation
 
@@ -339,6 +348,11 @@ If you use components of this pipeline, please also cite the underlying methods:
 - **AbMPNN**: [Dreyer, F. A., Cutting, D., Schneider, C., Kenlay, H. & Deane, C. M. Inverse folding for
 antibody sequence design using deep learning. (2023).](https://www.biorxiv.org/content/10.1101/2025.05.09.653228v1.full.pdf)
 - **PyRosetta**: [https://www.pyrosetta.org/](https://www.pyrosetta.org/)
+
+<!-- TOC --><a name="community-acknowledgments"></a>
+## Community Acknowledgments
+
+- cytokineking — for helping raise numerous bugs to our attention
 
 ## License
 

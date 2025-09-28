@@ -47,8 +47,11 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 
 **System Requirements:**
 - **GPU**: NVIDIA GPU with CUDA support
-- **Memory**: 80GB+ VRAM
+- **Memory**: 40GB+ VRAM*
 - **Storage (recommended)**: 50GB+ space for results
+
+> *The pipeline has been tested on: A100 40GB, H100 40GB MIG, L40S 48GB, A100 80GB, and H100 80GB.
+> These runs tested a 130 amino acid target with a 131 amino acid nanobody. For larger runs, we recommend 60GB+ VRAM.
 
 <!-- TOC --><a name="installation"></a>
 ### Installation
@@ -64,7 +67,7 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 4. Copy AlphaFold-Multimer parameters to `params/` and untar them. 
    Alternatively, you can run the following lines inside `params/` to download and untar:
    ```bash
-   aria2c -q -x 16 https://storage.googleapis.com/alphafold/alphafold_params_2022-12-06.tar
+   aria2c -x 16 https://storage.googleapis.com/alphafold/alphafold_params_2022-12-06.tar
    tar -xf alphafold_params_2022-12-06.tar -C .
    ```
 
@@ -297,7 +300,7 @@ runs/your_target_nb_20240101_120000/
 <!-- TOC --><a name="tips-for-design"></a>
 ## Important Notes and Tips for Design
 
-Hallucination is inherently expensive. Designing against a 130 residue target takes anywhere from 3-8 minutes for a nanobody design iteration, depending on which stage the hallucinated sequence reaches. For scFvs, this number is around 50% larger.
+Hallucination is inherently expensive. Designing against a 130 residue target takes anywhere from 2-8 minutes for a nanobody design iteration on an H100 80GB GPU, depending on which stage the designed sequence reaches. For 40GB GPUs or scFvs, this number is around 50% larger.
 
 During sampling, we typically run antibody generation until there are around 1,000 passing designs against the specified target and observe a success rate of around 0.5 - 1 per GPU hour. Of those, we typically select the top 40-50 sequences for experimental testing based on a combination of *in silico* metrics described in the preprint. While *in silico* success rates vary wildly across targets, we estimate that 200-400 H100 80GB GPU hours of sampling are typically enough to generate ~200 successful designs and some functional antibodies. 
 

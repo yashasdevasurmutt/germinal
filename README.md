@@ -18,6 +18,7 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 - [Setup](#setup)
    * [Requirements](#requirements)
    * [Installation](#installation)
+   * [Docker](#docker)
 - [Usage](#usage)
    * [Quick Start](#quick-start)
       + [Configuration Structure](#configuration-structure)
@@ -79,6 +80,37 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 
 Notes:
 - AlphaFold-Multimer and AlphaFold3 parameters are large and must be downloaded manually.
+
+<!-- TOC --><a name=docker"></a>
+### Docker
+Germinal can be run using Docker:
+
+```bash
+docker build -t germinal .
+docker run -it --rm --gpus all \
+  -v "$PWD/results:/workspace/results" \
+  -v "$PWD/pdbs:/workspace/pdbs" \
+  germinal bash
+```
+
+and Singularity (shown)/Apptainer:
+```bash
+mkdir -p results
+singularity pull germinal.sif docker://jwang003/germinal:latest
+singularity shell --nv \
+  --bind "$PWD/results:/workspace/results" \
+  --bind "$PWD/pdbs:/workspace/pdbs" \
+  --pwd /workspace \
+  germinal.sif
+```
+> **Note:** Pulling may hang on `Creating SIF file...` If so, check if the command is done with `singularity exec germinal.sif python -c "print('ok')"`
+
+Volumes are mounted to save generated input complexes and results from sampling.
+
+Once inside the container:
+```bash
+python run_germinal.py
+```
 
 <!-- TOC --><a name="usage"></a>
 ## Usage

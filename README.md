@@ -11,6 +11,9 @@ We describe Germinal in the preprint: ["Efficient generation of epitope-targeted
 
 **⚠️ We are still actively working on code improvements.**
 
+- We strongly recommend use of [AF3](https://github.com/google-deepmind/alphafold3) for design filtering as done in the paper, as filters are only calibrated for AF3 confidence metrics. We are actively working to add Chai calibrated thresholds for commercial users. Until then, running Germinal with `structure_model: "chai"` and not`structure_model: "af3"` should be considered experimental and may have lower passing rates.
+- While nanobody design is fully functional, we are still working on calibrating weightings and filters for scFv, so that functionality should still be also be considered experimental.
+
 ## Contents
 
 <!-- TOC -->
